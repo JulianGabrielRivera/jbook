@@ -16,7 +16,7 @@ const App =() =>{
         // we can use this ref anywhere in our component now
         ref.current = await esbuild.startService({
             worker:true,
-            wasmURL: '/esbuild.wasm'
+            wasmURL: 'https://unpkg.com/esbuild-wasm@0.8.27/esbuild.wasm'
         })
         
     }
@@ -45,7 +45,16 @@ const App =() =>{
             }
         })
         console.log(result)
+        // contains out transpiled and bundle code here.
       setCode(result.outputFiles[0].text);
+
+    //   built in to browser function
+    try{
+    eval(result.outputFiles[0].text);
+    }
+    catch(err){
+        alert(err);
+    }
     };
     return <div>
         <textarea value={input} onChange={e=>{
@@ -55,6 +64,8 @@ const App =() =>{
             <button onClick={onClick}>Submit</button>
         </div>
         <pre>{code}</pre>
+        {/* embed a document into another document html */}
+        <iframe sandbox="" src="/test.html" />
     </div>
 }
 ReactDOM.render(<App />, document.querySelector('#root'))
