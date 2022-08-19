@@ -81,7 +81,7 @@ throw err;
 
     // if we put throw err below the error on box then it will console.log our error as well
     return <div>
-        <CodeEditor/>
+        <CodeEditor initialValue='const a = 1;' onChange={(value)=> setInput(value)}/>
        
         <textarea value={input} onChange={e=>{
             setInput(e.target.value)
