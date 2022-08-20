@@ -1,6 +1,6 @@
 import {useRef} from 'react';
 
-import MonacoEditor, {EditorDidMount} from '@monaco-editor/react';
+import MonacoEditor, {EditorDidMount, monaco} from '@monaco-editor/react';
 import prettier from 'prettier';
 import parser from 'prettier/parser-babel'
 
@@ -13,6 +13,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({onChange, initialValue}) =>{
     const editorRef = useRef<any>();
     // typescript now understands that we are trying to provide a function and assign it to oneditordidmount that satisfies this type.
     const onEditorDidMount: EditorDidMount = (getValue, monacoEditor)=>{
+        editorRef.current = monacoEditor;
         monacoEditor.onDidChangeModelContent(()=>{
             onChange(getValue());
         })
@@ -21,11 +22,23 @@ console.log(getValue())
 
     }
     const onFormatClick = () =>{
+        console.log(editorRef.current)
         // get current value from editor
+        const unformatted = editorRef.current.getModel().getValue()
 
         // format value
 
+        const formatted = prettier.format(unformatted, {
+
+            parser:'babel',
+            plugins: [parser],
+            useTabs:false,
+            semi: true,
+            singleQuote: true
+        })
+
         // set the formatted value back in the editor
+        editorRef.current.setValue(formatted)
     }
     // this initialvalue above is a prop being parsed so we can use down on our return 
 return (
