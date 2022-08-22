@@ -5,6 +5,7 @@ import CodeEditor from './code-editor';
 
 import Preview from './preview';
 import bundle from '../bundler'
+import Resizable from "./resizable";
 
 
 const CodeCell =() =>{
@@ -64,17 +65,21 @@ const CodeCell =() =>{
    
 
     // if we put throw err below the error on box then it will console.log our error as well
-    return <div>
+    return (
+    <Resizable direction='vertical'>
+        <div style={{height:'100%', display:'flex', flexDirection: 'row'}}>
         <CodeEditor initialValue='const a = 1;' onChange={(value)=> setInput(value)}/>
        
-     
+{/*      
         <div>
             <button onClick={onClick}>Submit</button>
-        </div>
+        </div> */}
      
         {/* embed a document into another document html */}
         {/* srcdoc html makes request to local string instead of some outside url, we also cant use localstorage/cookies like thid */}
        <Preview code={code}/>
     </div>
+    </Resizable>
+    );
 }
 export default CodeCell;

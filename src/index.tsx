@@ -19,7 +19,7 @@ const App =() =>{
     // if we put throw err below the error on box then it will console.log our error as well
     return <div>
        <CodeCell />
-       <CodeCell/>
+       {/* <CodeCell/> */}
     </div>
 }
 
