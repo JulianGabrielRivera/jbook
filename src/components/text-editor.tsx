@@ -1,5 +1,6 @@
 import MDEditor from "@uiw/react-md-editor";
 import {useState, useEffect, useRef} from 'react'
+import './text-editor.css';
 
 // type of component react function component
 const TextEditor: React.FC = ()=>{
