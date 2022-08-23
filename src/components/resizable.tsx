@@ -36,7 +36,7 @@ window.addEventListener('resize', listener)
 return () =>{
     window.removeEventListener('resize', listener)
 }
-    }, [])
+    }, [width])
     if(direction === 'horizontal'){
         resizeableProps = {
             className: 'resize-horizontal',

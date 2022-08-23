@@ -1,5 +1,5 @@
 
-import {useState} from "react"  
+import {useState, useEffect} from "react"  
 
 import CodeEditor from './code-editor';
 
@@ -12,7 +12,15 @@ const CodeCell =() =>{
     const [input, setInput] = useState('')
     const [code,setCode] = useState('')
   
-
+    useEffect(()=>{
+    const timer = setTimeout(async()=>{
+    const output = await bundle(input)
+    setCode(output);
+},1000)
+return () =>{
+    clearTimeout(timer);
+}
+    },[input])
     // const ref = useRef<any>();
    
 
@@ -31,6 +39,7 @@ const CodeCell =() =>{
     // }, [])
     const onClick = async () =>{
         const output = await bundle(input)
+        setCode(output);
         // stops the error message if users immediately click the submit button without putting anything inside
         // if(!ref.current){
         // return;
@@ -54,7 +63,7 @@ const CodeCell =() =>{
         // })
         // console.log(result)
         // contains out transpiled and bundle code here.
-      setCode(output);
+      
 // iframe.current.contentWindow.postMessage(result.outputFiles[0].text, '*')
     //   built in to browser function
   
