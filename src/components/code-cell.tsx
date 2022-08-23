@@ -11,11 +11,13 @@ import Resizable from "./resizable";
 const CodeCell =() =>{
     const [input, setInput] = useState('')
     const [code,setCode] = useState('')
+    const [err, setErr] = useState('');
   
     useEffect(()=>{
     const timer = setTimeout(async()=>{
     const output = await bundle(input)
-    setCode(output);
+    setCode(output.code);
+    setErr(output.err)
 },1000)
 return () =>{
     clearTimeout(timer);
@@ -39,7 +41,7 @@ return () =>{
     // }, [])
     const onClick = async () =>{
         const output = await bundle(input)
-        setCode(output);
+        setCode(output.code);
         // stops the error message if users immediately click the submit button without putting anything inside
         // if(!ref.current){
         // return;
@@ -88,7 +90,7 @@ return () =>{
      
         {/* embed a document into another document html */}
         {/* srcdoc html makes request to local string instead of some outside url, we also cant use localstorage/cookies like thid */}
-       <Preview code={code}/>
+       <Preview code={code} err={err}/>
     </div>
     </Resizable>
     );

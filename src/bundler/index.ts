@@ -12,6 +12,7 @@ const bundle = async (rawCode:string) =>{
                 wasmURL: 'https://unpkg.com/esbuild-wasm@0.8.27/esbuild.wasm'
             });
         }
+        try{
        const result = await service.build({
             entryPoints: ['index.js'],
             bundle:true,
@@ -23,7 +24,22 @@ const bundle = async (rawCode:string) =>{
                 global: 'window',
             },
         });
+        
+        return { code: result.outputFiles[0].text,
+            err: ''
+        }
+        
+    } catch (err) {
+        if (err instanceof Error) {
+          return {
+            code: "",
+            err: err.message,
+          };
+        } else {
+          throw err;
+        }
+      }
         // our actual code we transpiled and bundled
-        return result.outputFiles[0].text
+     
 };
 export default bundle;
