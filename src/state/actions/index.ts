@@ -16,7 +16,7 @@ payload: string;
 export interface InsertCellBeforeAction{
 type: ActionType.INSERT_CELL_BEFORE
 payload:{
-    id:string;
+    id:string | null;
     type: CellTypes
 }
 }
