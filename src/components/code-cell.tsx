@@ -13,21 +13,21 @@ interface CodeCellProps{
     cell:Cell
 }
 const CodeCell: React.FC<CodeCellProps>=({cell}) =>{
-    const [input, setInput] = useState('')
+    
     const [code,setCode] = useState('')
     const [err, setErr] = useState('');
     const {updateCell} = useActions();
   
     useEffect(()=>{
     const timer = setTimeout(async()=>{
-    const output = await bundle(input)
+    const output = await bundle(cell.content)
     setCode(output.code);
     setErr(output.err)
 },1000)
 return () =>{
     clearTimeout(timer);
 }
-    },[input])
+    },[cell.content])
     // const ref = useRef<any>();
    
 
@@ -44,9 +44,9 @@ return () =>{
     // useEffect(()=>{
     //     startService()
     // }, [])
-    const onClick = async () =>{
-        const output = await bundle(input)
-        setCode(output.code);
+    // const onClick = async () =>{
+    //     const output = await bundle(input)
+    //     setCode(output.code);
         // stops the error message if users immediately click the submit button without putting anything inside
         // if(!ref.current){
         // return;
@@ -74,7 +74,7 @@ return () =>{
 // iframe.current.contentWindow.postMessage(result.outputFiles[0].text, '*')
     //   built in to browser function
   
-    };
+    // };
 
   
 
@@ -85,7 +85,7 @@ return () =>{
     <Resizable direction='vertical'>
         <div style={{height:'100%', display:'flex', flexDirection: 'row'}}>
             <Resizable direction="horizontal">
-        <CodeEditor initialValue='const a = 1;' onChange={(value)=> setInput(value)}/>
+        <CodeEditor initialValue={cell.content} onChange={(value)=> updateCell(cell.id,value)}/>
         </Resizable>
        
 {/*      

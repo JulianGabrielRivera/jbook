@@ -1,5 +1,5 @@
 import {ActionType} from '../action-types'
-import {Action, UpdateCellAction,DeleteCellAction,MoveCellAction,InsertCellBeforeAction, Direction } from '../actions'
+import { UpdateCellAction,DeleteCellAction,MoveCellAction,InsertCellBeforeAction, Direction } from '../actions'
 import { CellTypes } from '../cell';
 // must be called with an argument of id, annotate updatecellaction
 export const updateCell = (id: string, content: string): UpdateCellAction =>{

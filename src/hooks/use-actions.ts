@@ -1,6 +1,6 @@
 import { useDispatch} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {actionCreators} from '../state';
+import {actionCreators} from '../state'
 
 export const useActions = () =>{
     const dispatch = useDispatch();
@@ -8,6 +8,4 @@ export const useActions = () =>{
     return bindActionCreators(actionCreators, dispatch);
 }
 
-const {updateCell} = useActions();
-
-updateCell();
+  
