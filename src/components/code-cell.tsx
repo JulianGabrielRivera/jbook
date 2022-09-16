@@ -83,7 +83,7 @@ return () =>{
     // if we put throw err below the error on box then it will console.log our error as well
     return (
     <Resizable direction='vertical'>
-        <div style={{height:'100%', display:'flex', flexDirection: 'row'}}>
+        <div style={{height:'calc(100%-10px)', display:'flex', flexDirection: 'row'}}>
             <Resizable direction="horizontal">
         <CodeEditor initialValue={cell.content} onChange={(value)=> updateCell(cell.id,value)}/>
         </Resizable>

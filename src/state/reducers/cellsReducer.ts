@@ -41,7 +41,7 @@ switch(action.type) {
             state.order[index] = state.order[targetIndex];
             state.order[targetIndex] = action.payload.id;
             return state;
-            case ActionType.INSERT_CELL_BEFORE:
+            case ActionType.INSERT_CELL_AFTER:
                 const cell: Cell = {
                     content: '',
                     type: action.payload.type,
